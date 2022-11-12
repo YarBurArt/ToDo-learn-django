@@ -1,1 +1,19 @@
-
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        {% block title %}
+            основа
+        {% endblock %}
+    </title>
+</head>
+<body>
+    {% block content %}
+        <p>это база</p>
+    {% endblock %}
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>
