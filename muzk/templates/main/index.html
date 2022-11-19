@@ -1,3 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Index{% endblock title %}
-{% block content %}Главная{% endblock content %}
+{% block content %}
+{% for url in urls %}
+    <audio src="{{ url }}"></audio>
+{% endfor %}
+{% endblock content %}
