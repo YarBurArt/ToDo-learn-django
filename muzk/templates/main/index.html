@@ -1,7 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Index{% endblock title %}
 {% block content %}
-{% for url in urls %}
-    <audio src="{{ url }}"></audio>
-{% endfor %}
-{% endblock content %}
+<audio src="{% static "main/music/moguch.mp3" %}"></audio>
+{% endblock %}
