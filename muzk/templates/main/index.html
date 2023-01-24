@@ -2,5 +2,7 @@
 {% load static %}
 {% block title %}Index{% endblock title %}
 {% block content %}
-<audio src="{% static "main/music/moguch.mp3" %}"></audio>
+<audio>
+<source> src="{% static "main/music/moguch.mp3" %}" type="audio/mpeg"></source>
+</audio>
 {% endblock %}
