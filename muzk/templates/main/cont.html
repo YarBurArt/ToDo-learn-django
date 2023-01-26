@@ -1,8 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 {% for contact in contacts %}
-<a href="{{ contact.url}}">{{ contact.name }}</a>
-<p>{{ contact.add_i }}</p>
+<address>
+    <strong>{{ contact.add_i }}</strong>
+    <a href="{{ contact.url}}">{{ contact.name }}</a>
+<address/>
 {% endfor %}
 {% endblock %}
 
