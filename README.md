@@ -1,2 +1,2 @@
 # django-learn
-my govnocode
+my govnocode todo list with CRUD
