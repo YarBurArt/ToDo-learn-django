@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<div class="centrelis">
 {% for contact in contacts %}
 <address>
     <strong>{{ contact.add_i }}</strong>
     <a href="{{ contact.url}}">{{ contact.name }}</a>
 <address/>
 {% endfor %}
+</div>
 {% endblock %}
 

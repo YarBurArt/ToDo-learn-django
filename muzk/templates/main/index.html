@@ -2,8 +2,8 @@
 {% load static %}
 {% block title %}Index{% endblock title %}
 {% block content %}
-
-<div style="margin-top: 50px;" class="ui container">
+<div class="centrelis">
+<div style="margin-top: 50px;" class="ui container ">
     <h1 class="ui center aligned header">Task Manager</h1>
     <form class="ui form" action="{% url 'add' %}" method="post">
         {% csrf_token %}
@@ -29,5 +29,5 @@
 </div>
 {% endfor %}
 </div>
-
+</div>
 {% endblock content %}
