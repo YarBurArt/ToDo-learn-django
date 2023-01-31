@@ -7,6 +7,14 @@ from .models import ToDo
 
 from .strings import about_me_str, contacts
 
+from .serializers import ToDoSerializer
+from rest_framework import generics
+
+
+class ToDoListCreate(generics.ListCreateAPIView):
+    queryset = ToDo.objects.all()
+    serializer_class = ToDoSerializer
+
 
 def index(request):
     todos = ToDo.objects.all()
