@@ -18,15 +18,18 @@ class ToDoListCreate(generics.ListCreateAPIView):
 
 def index(request):
     todos = ToDo.objects.all()
-    context = {'todo_list': todos, 'title': 'Главная страница'}
-    return render(request, 'main/index.html', context=context)
+    context = {'todo_list': todos, 
+               'title': 'Главная страница'}
+    return render(request, 'main/index.html',
+                  context=context)
 
 
 @require_http_methods(['POST'])
 @csrf_exempt
 def add(request):
     title = request.POST['title']
-    todo = ToDo(title=title, date_created=timezone.now())
+    todo = ToDo(title=title, 
+                date_created=timezone.now())
     todo.save()
     return redirect('index')
 
@@ -48,8 +51,10 @@ def delete(request, todo_id):
 
 
 def about(request):
-    return render(request, "main/about.html", context={'text': about_me_str})
+    return render(request, "main/about.html",
+                  context={'text': about_me_str})
 
 
 def contact(request):
-    return render(request, "main/cont.html", context={'contacts': contacts})
+    return render(request, "main/cont.html", 
+                  context={'contacts': contacts})
