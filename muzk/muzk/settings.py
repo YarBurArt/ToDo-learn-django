@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'frontend',  # enable the frontend app
     'accounts',
+    'blog',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
