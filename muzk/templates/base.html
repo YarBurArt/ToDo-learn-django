@@ -26,7 +26,16 @@
           <a class="nav-item nav-link" href="/index">Home</a>
           <a class="nav-item nav-link" href="/about">About</a>
           <a class="nav-item nav-link" href="/contact">Contact</a>
-          <a class="nav-item nav-link" href="/auth/login">Login</a>
+
+          {% if user.is_authenticated %}
+            <span>{{ user.username }}</span>
+            <a class="nav-item nav-link" href="{% url 'account_logout' %}">logout</a>
+          {% else %}
+            <!--<a class="nav-item nav-link" href="/auth/login">Login</a>-->
+            <a class="nav-item nav-link" href="{% url 'account_logout' %}">login</a>
+            <a class="nav-item nav-link" href="{% url 'account_signup' %}">signup</a>
+          {% endif %}
+
           <a class="nav-item nav-link" href="/post">Blog</a>
           <a class="nav-item nav-link" href="/post/new_post">New-Post</a>
         </div>
