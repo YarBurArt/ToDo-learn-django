@@ -3,5 +3,9 @@
 {% block title %} YarBurArt {% endblock %}
 {% block content %}
 <h2 class="centrelis">Information about me</h2>
-<p class="text-success">{{ text }}</p>
+{% if user.is_authenticated %}
+    <p class="text-success">{{ text }}</p>
+{% else %}
+    <p class="text-success">Null information</p>
+{% endif %}
 {% endblock %}
