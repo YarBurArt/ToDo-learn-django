@@ -15,8 +15,8 @@ def index(request):
 
 
 def get_weather(request, city):
-    # api_key = os.getenv('WEATHERAPI') # debug it
-    api_key = 'c055a3203a2661c90826ea61d42da4bc'
+    api_key = os.getenv('WEATHERAPI') # debug it
+
 
     res = requests.get("http://api.openweathermap.org/data/2.5/find",
                        params={'q': city, 'type': 'like',
