@@ -1,13 +1,13 @@
 body {
     float: center;
-    background-color: #181818;
+    background-color: #d3d3d3;
     width-min: 40%;
     padding: 3%;
     height: 60%;
 }
-p, strong {
+/* p, strong {
     color:#e7e8e6;
-}
+} */
 a, u {
   padding: 1%;
   text-decoration: none;

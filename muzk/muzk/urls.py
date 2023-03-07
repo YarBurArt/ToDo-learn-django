@@ -23,5 +23,6 @@ urlpatterns = [
     path('auth/', include('accounts.urls')),
     path('accounts/', include('allauth.urls')),
     # path('', include('frontend.urls')),
-    path('post/', include('blog.urls'))
+    path('post/', include('blog.urls')),
+    path('weather/', include('weather.urls'))
 ]
