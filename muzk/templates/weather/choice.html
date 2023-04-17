@@ -2,7 +2,19 @@
 {% block content %}
 <form name="idform">
     <input type="text" name="id" value="City name">
-    <input type="button" value="ок!"
-           onclick="location.href='http://127.0.0.1:8000/weather/'+escape(document.forms['idform'].elements['id'].value)">
+    <input type="button" value="ок!" onclick=get_url()>
 </form>
+{% if city %}
+    {% if city|length > 2 %}
+        <p>Weather for {{ city }} temp: {{ temp }} C</p>
+    {% endif  %}
+{% endif %}
 {% endblock content %}
+{% block scripts %}
+    <script>
+        function get_url(){
+            var city = escape(document.forms['idform'].elements['id'].value);
+            location.href='http://127.0.0.1:8000/weather/'+ city;
+        }
+    </script>
+{% endblock %}
