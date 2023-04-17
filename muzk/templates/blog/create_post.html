@@ -3,7 +3,7 @@
 {% block title %} YarBurArt {% endblock %}
 {% block content %}
 <h1 class="ui center aligned header">Create post</h1>
-<form style="margin-top: 20px;" class="form-inline" action="{% url 'add' %}" method="post">
+<form style="margin-top: 20px;" class="form-inline" action="{% url 'addt' %}" method="post">
     {% csrf_token %}
     <div class="form-group mx-sm-3 mb-2">
         <input class="form-control" type="text" name="title" placeholder="Name post . . ."><br>

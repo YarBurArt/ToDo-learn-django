@@ -2,11 +2,13 @@
 {% load static %}
 {% block title %} {{ title }} {% endblock %}
 {% block content %}
-{% for post in post_list %}
-<div class="ui segment">
-    <p class="ui big header">№{{ post.id }} {{ post.title }} | date created post: {{ post.date_created }}</p><br>
-    <p class="ui big header">{{ post.text }}</p>
-    <hr/>
-</div>
+{% for post_l in post_list %}
+
+    <div class="ui segment">
+        <p class="ui big header">№{{ post.id }} {{ post.title }} | date created post: {{ post.date_created }}</p><br>
+        <p class="ui big header">{{ post.text }}</p>
+        <hr/>
+    </div>
+
 {% endfor %}
 {% endblock %}
