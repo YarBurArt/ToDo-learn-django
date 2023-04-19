@@ -32,5 +32,5 @@ def addt(request):
     post = Post(title=title, text=text,
                 date_created=timezone.now())
     post.save()
-    return HttpResponseRedirect("/about")
+    return HttpResponseRedirect("/post")
 
