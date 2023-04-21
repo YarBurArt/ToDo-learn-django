@@ -17,7 +17,13 @@ class PostView(TypedDict):
     title: str
 
 
-def posts(request: HttpRequest) -> HttpResponse:
+sample_request = HttpRequest()
+sample_request.method = "GET"
+sample_request.path = "/index/"
+sample_request.META['HTTP_USER_AGENT'] = 'Mozilla/5.0'
+
+
+def posts(request: HttpRequest = sample_request) -> HttpResponse:
     post_data: QuerySet = Post.objects.all()
     context: PostView = {'post_list': post_data,
                          'title': 'Blog'}
@@ -25,13 +31,13 @@ def posts(request: HttpRequest) -> HttpResponse:
                   context=context)
 
 
-def create_post(request: HttpRequest) -> HttpResponse:
+def create_post(request: HttpRequest = sample_request) -> HttpResponse:
     return render(request, 'blog/create_post.html')
 
 
 @require_http_methods(['POST'])
 @csrf_exempt
-def add_new_post(request: HttpRequest) -> HttpResponseRedirect:
+def add_new_post(request: HttpRequest = sample_request) -> HttpResponseRedirect:
     title: str = request.POST['title']
     text: str = request.POST['text']
     post = Post(title=title, text=text,
