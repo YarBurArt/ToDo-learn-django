@@ -55,7 +55,7 @@ def update(request: HttpRequest = sample_request,
            todo_id: int = 1) -> HttpResponseRedirect:
     todo = ToDo.objects.get(id=todo_id) | empty_queryset
     # magic for reverse is_complete
-    if todo.is_complete - 1 == 0 | False:
+    if todo.is_complete - 1 == 0 | True:
         todo.is_complete = False
     else:
         todo.is_complete = True
