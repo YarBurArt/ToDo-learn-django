@@ -10,7 +10,7 @@ class App extends Component {
       placeholder: "Loading"
     };
   }
-
+  // get tasks 
   componentDidMount() {
     fetch("api/todo")
       .then(response => {
@@ -30,7 +30,7 @@ class App extends Component {
         });
       });
   }
-
+  // base list of tasks 
   render() {
     return (
       <ul>
