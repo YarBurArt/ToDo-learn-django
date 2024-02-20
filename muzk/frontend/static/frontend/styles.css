@@ -1,0 +1,16 @@
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex; }
+  ul li {
+    margin-bottom: 10px; }
+    ul li:last-child {
+      margin-bottom: 0; }
+    ul li::before {
+      content: "ID: ";
+      font-weight: bold; }
+    ul li span.name {
+      font-weight: bold; }
+    ul li span.email {
+      color: blue; }

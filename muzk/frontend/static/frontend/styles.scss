@@ -1,0 +1,30 @@
+ul {
+  // Styles for the <ul> element
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  li {
+    // Styles for each <li> element
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+    // Styles for the key
+    &::before {
+      content: "ID: ";
+      font-weight: bold;
+    }
+    // Styles for the contact name
+    span.name {
+      font-weight: bold;
+    }
+
+    // Styles for the contact email
+    span.email {
+      color: blue;
+    }
+  }
+}
+
