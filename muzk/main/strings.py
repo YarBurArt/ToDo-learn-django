@@ -1,3 +1,4 @@
+""" static variables, a crutch from the DB """
 about_me_str = """
 I am a passionate learner with a love of programming. 
 I have recently started learning Python and C sharp, 
