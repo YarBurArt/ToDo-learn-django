@@ -1,3 +1,6 @@
+""" for hand editing in the admin panel """
 from django.contrib import admin
+from .models import Post
 
-# Register your models here.
+# registry of the task table
+admin.site.register(Post)

@@ -1,4 +1,4 @@
-""" this module implements views for the tasks and notes page """
+""" module implements views for the tasks and notes page """
 from typing import TypedDict
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect

@@ -1,3 +1,4 @@
+""" module for describing hands and their views """
 from django.urls import path
 from . import views
 
