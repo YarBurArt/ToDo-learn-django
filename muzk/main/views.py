@@ -29,12 +29,12 @@ empty_queryset = QuerySet()
 
 
 class ToDoListCreate(generics.ListCreateAPIView):
-    queryset: QuerySet = ToDo.objects.all() | empty_queryset
+    queryset: QuerySet = ToDo.objects.all()
     serializer_class = ToDoSerializer
 
 
 def index(request: HttpRequest = sample_request) -> HttpResponse:
-    todos: QuerySet = ToDo.objects.all() | empty_queryset
+    todos: QuerySet = ToDo.objects.all()
     context: TodoView = {'todo_list': todos,
                          'title': 'Главная страница'}
     return render(request, 'main/index.html',
@@ -53,7 +53,7 @@ def add(request: HttpRequest = sample_request) -> HttpResponseRedirect:
 
 def update(request: HttpRequest = sample_request,
            todo_id: int = 1) -> HttpResponseRedirect:
-    todo = ToDo.objects.get(id=todo_id) | empty_queryset
+    todo = ToDo.objects.get(id=todo_id)
     # magic for reverse is_complete
     if todo.is_complete - 1 == 0 | True:
         todo.is_complete = False
@@ -65,7 +65,7 @@ def update(request: HttpRequest = sample_request,
 
 def delete(request: HttpRequest = sample_request,
            todo_id: int = 1) -> HttpResponseRedirect:
-    todo = ToDo.objects.get(id=todo_id) | empty_queryset
+    todo = ToDo.objects.get(id=todo_id)
     todo.delete()
     return redirect('index')
 
