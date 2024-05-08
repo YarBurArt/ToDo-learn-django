@@ -40,10 +40,6 @@ To start the server, execute
 
 Open your browser and go to the address http://127.0.0.1:8000/
 
-## Bugs, mark not to be confused
-
-- The frontend application on react doesn't work because of a bug in the architecture, but it was originally an experiment. Now the frontend runs on jinja2
-
 ## TODO
 - normal design
 - optimization 
