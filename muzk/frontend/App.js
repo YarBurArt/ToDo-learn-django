@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import { createRoot } from 'react-dom/client';
 
+function formatDate(dateString) {
+  // '2023-04-17T14:14:55.232984Z' -> '17.04.2023 14:14:55'
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  const formattedDate = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+  return formattedDate;
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +51,7 @@ class App extends Component {
         {this.state.loaded ? (
           this.state.data.map(contact => (
             <li key={contact.id}>
-              {contact.title} - {contact.is_complete}
+              {contact.is_complete ? '✔️' : '❌' } | {contact.title} | {formatDate(contact.date_created)}
             </li>
           ))
         ) : (
