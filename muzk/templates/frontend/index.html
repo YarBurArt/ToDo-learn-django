@@ -9,6 +9,15 @@
   <link rel="stylesheet" href="{% static "frontend/styles.css" %}">
 </head>
 <body>
+<div id="form-container">
+<form style="margin-top: 20px;" id="form" class="form-inline" action="{% url 'add' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group mx-sm-3 mb-2">
+        <input class="form-control" id="name-input" type="text" name="title" placeholder="New task . . ."><br>
+        <button class="btn btn-primary mb-2" id="submit-button" type="submit">Add task</button>
+    </div>
+</form>
+</div>
 <h2>That's all the shuffles in the database /</h2>
 <div id="app">
     <!-- React will load here -->

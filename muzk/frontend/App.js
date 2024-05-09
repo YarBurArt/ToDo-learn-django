@@ -13,7 +13,13 @@ function formatDate(dateString) {
   const formattedDate = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
   return formattedDate;
 }
-
+const UpdateTodoButton = ({ todoId }) => { // TODO:
+  return (
+    <a href={`http://127.0.0.1:8000/update_todo/${todoId}`}>
+      <button className="update-todo-button">Update status</button>
+    </a>
+  );
+};
 class App extends Component {
   constructor(props) {
     super(props);
@@ -52,6 +58,7 @@ class App extends Component {
           this.state.data.map(contact => (
             <li key={contact.id}>
               {contact.is_complete ? '✔️' : '❌' } | {contact.title} | {formatDate(contact.date_created)}
+              | <UpdateTodoButton todoId={contact.id} />
             </li>
           ))
         ) : (

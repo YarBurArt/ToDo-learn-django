@@ -49,7 +49,7 @@ def add(request: HttpRequest = sample_request) -> HttpResponseRedirect:
     todo = ToDo(title=title,
                 date_created=timezone.now())
     todo.save()
-    return redirect('index')
+    return redirect('http://127.0.0.1:8000/frnt/')  # new index
 
 
 def update(request: HttpRequest = sample_request,
@@ -60,7 +60,7 @@ def update(request: HttpRequest = sample_request,
     # one-liner inverts value (True => False, False => True)
     todo.is_complete = not tmp_i if tmp_i else True
     todo.save()
-    return redirect('index')
+    return redirect('http://127.0.0.1:8000/frnt/')  # new index
 
 
 def delete(request: HttpRequest = sample_request,

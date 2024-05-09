@@ -1,3 +1,67 @@
+/* Центрирование формы */
+#form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+/* Шрифты */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Цвета */
+#form {
+  width:740px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 20px;
+  margin:0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#name-input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  width:95%;
+}
+
+#submit-button {
+  background-color: #4CAF50; /* Зеленый цвет */
+  color: #fff; /* Белый цвет */
+  border: none;
+  margin-left:10px;
+  padding: 10px 20px; /* Уменьшенные отступы */
+  border-radius: 10px; /* Скругленные углы */
+  cursor: pointer;
+  justify-content: flex-end;
+  transition: background-color 0.3s; /* Плавный переход цвета */
+  font-family: 'Roboto', sans-serif; /* Шрифт Roboto */
+  font-size: 14px; /* Размер шрифта 14px */
+}
+
+#submit-button:hover {
+  background-color: #3e8e41;
+}
+.update-todo-button {
+  background-color: #4CAF50; /* Зеленый цвет */
+  color: #fff; /* Белый цвет */
+  border: none;
+  margin-left:10px;
+  padding: 10px 20px; /* Уменьшенные отступы */
+  border-radius: 10px; /* Скругленные углы */
+  cursor: pointer;
+  justify-content: flex-end;
+  transition: background-color 0.3s; /* Плавный переход цвета */
+  font-family: 'Roboto', sans-serif; /* Шрифт Roboto */
+  font-size: 14px; /* Размер шрифта 14px */
+}
+.update-todo-button:hover {
+  background-color: #3e8e41; /* Темно-зеленый цвет при наведении */
+}
 h2 {
   font-family: 'Roboto', sans-serif; /* Шрифт Google Roboto */
   font-size: 24px; /* Размер шрифта */
