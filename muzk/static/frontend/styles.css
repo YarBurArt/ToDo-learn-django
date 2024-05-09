@@ -1,10 +1,50 @@
+.dropdown {
+  position: fixed;
+  top: 0;
+  left: 2;
+  margin-top:10px;
+  z-index: 100;
+}
+
+.dropdown-button {
+  background-color: #4CAF50; /* Зеленый цвет */
+  color: white; /* Белый цвет */
+  padding: 10px 15px; /* Отступы */
+  border: none; /* Убирает границу */
+  cursor: pointer; /* Указатель курсора */
+  border-radius: 10px;
+}
+
+.dropdown-content {
+  display: none; /* Скрывает содержимое по умолчанию */
+  position: absolute; /* Позиционирует элемент относительно его ближайшего позиционированного родителя */
+  background-color: #f9f9f9; /* Серый фон */
+  min-width: 160px; /* Минимальная ширина */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* Тень */
+  z-index: 1; /* Отображает элемент поверх других элементов */
+}
+
+.dropdown-content a {
+  color: black; /* Черный цвет */
+  padding: 12px 16px; /* Отступы */
+  text-decoration: none; /* Убирает подчеркивание */
+  display: block; /* Отображает элементы как блоки */
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1; /* Серый фон при наведении */
+}
+
+.dropdown:hover .dropdown-content {
+  display: block; /* Отображает содержимое при наведении на кнопку */
+}
 /* Центрирование формы */
 #form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
+  min-height: 100px;
 }
 
 /* Шрифты */
@@ -15,11 +55,10 @@ body {
 /* Цвета */
 #form {
   width:740px;
-  background-color: #f0f0f0;
   border-radius: 5px;
   padding: 20px;
   margin:0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 #name-input {

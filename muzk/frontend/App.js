@@ -20,6 +20,37 @@ const UpdateTodoButton = ({ todoId }) => { // TODO:
     </a>
   );
 };
+const Dropdown = ({}) => {
+  return (
+    <div className="dropdown">
+      <button className="dropdown-button">
+        Menu
+      </button>
+      {(
+        <ul className="dropdown-content">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/contact">Contact</a>
+          </li>
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+          <li>
+            <a href="/new-post">New Post</a>
+          </li>
+          <li>
+            <a href="/login">Login</a>
+          </li>
+        </ul>
+      )}
+    </div>
+  );
+};
 class App extends Component {
   constructor(props) {
     super(props);
@@ -53,6 +84,7 @@ class App extends Component {
   // base list of tasks 
   render() {
     return (
+       <div><Dropdown/>
       <ul>
         {this.state.loaded ? (
           this.state.data.map(contact => (
@@ -65,6 +97,7 @@ class App extends Component {
           <li>Loading tasks...</li>
         )}
       </ul>
+      </div>
     );
   }
 }
