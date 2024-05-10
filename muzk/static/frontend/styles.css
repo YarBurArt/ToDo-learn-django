@@ -1,3 +1,27 @@
+/* Для экранов шириной менее 600px */
+@media (max-width: 600px) {
+  .mrkdn {
+    width: 90%; /* 90% ширины родительского элемента */
+    margin-left: 5%;
+  }
+}
+/* Для экранов шириной от 600px до 900px */
+@media (min-width: 600px) and (max-width: 900px) {
+  .mrkdn {
+    width: 80%; /* 80% ширины родительского элемента */
+    margin-left: 10%;
+  }
+}
+/* Для экранов шириной более 900px */
+@media (min-width: 900px) {
+  .mrkdn {
+    width: 800px; /* 70% ширины родительского элемента */
+  }
+}
+.mrkdn {
+  margin: 0 auto; /* Автоматические отступы слева и справа */
+  margin-bottom: 10px;
+}
 .dropdown {
   position: fixed;
   top: 0;
@@ -108,7 +132,7 @@ h2 {
   text-align: center; /* Выравнивание по центру */
 }
 /* Центрирование списка (из предыдущего ответа) */
-ul {
+.task_ul {
   font-family: 'Roboto', sans-serif;
   display: flex;
   justify-content: flex-start;
@@ -118,7 +142,7 @@ ul {
 }
 
 /* Стили списка */
-ul {
+.task_ul {
   flex-direction: column;
   list-style: none;
   padding: 0; /* Убрать отступы по умолчанию */
@@ -127,7 +151,7 @@ ul {
 }
 
 /* Стили элемента списка */
-li {
+.task_li {
   padding: 15px 20px; /* Увеличить отступы внутри элемента */
   background-color: #fff; /* Белый фон */
   border-radius: 8px; /* Закруглить углы элементов списка */
@@ -136,6 +160,6 @@ li {
 }
 
 /* Стили элемента списка при наведении */
-li:hover {
+.task_li:hover {
   background-color: #f5f5f5; /* Светло-серый фон при наведении */
 }

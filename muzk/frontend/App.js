@@ -1,5 +1,8 @@
 import React, { Component, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm";
+
 
 function formatDate(dateString) {
   // '2023-04-17T14:14:55.232984Z' -> '17.04.2023 14:14:55'
@@ -20,6 +23,32 @@ const UpdateTodoButton = ({ todoId }) => { // TODO:
     </a>
   );
 };
+const AboutBlock = () => {
+  let content = `
+## About Me
+
+I'm a passionate learner with a love for programming!  I recently began diving into the worlds of Python and C#, eager to expand my knowledge in these languages. As a beginner, I'm focusing on building a strong foundation by mastering the fundamentals of programming concepts. I'm also exploring the vast landscape of libraries, frameworks, and tools available for both languages.
+
+- Self-Driven Learner
+
+Beyond programming, I'm also captivated by the world of digital art.  I find joy in using various digital art tools to bring unique designs and illustrations to life. The challenge of creating something new and the boundless freedom of digital art truly inspire me. I'm constantly experimenting with different techniques and tools, eager to see where my creative journey takes me.
+
+- Strong Work Ethic and Determination
+
+In my eyes, programming and digital art beautifully complement each other. By grasping programming fundamentals, I'm able to craft more intricate and captivating artwork. Likewise, my understanding of digital art empowers me as a programmer, allowing me to design visually stunning applications and websites.
+
+- Cross-disciplinary Skills
+
+My passion for both programming and digital art has fueled a strong work ethic, determination, and unwavering motivation to succeed. I constantly push myself to learn more and refine my skills in both disciplines. I'm incredibly excited to see how far I can take my programming and digital art journey!
+`;
+  return (
+    <div className="mrkdn" id="about">
+    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+      {content}
+    </ReactMarkdown>
+    </div>
+  )
+}
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -33,24 +62,24 @@ const Dropdown = () => {
         Menu
       </button>
       {isOpen && (
-        <ul className="dropdown-content">
-          <li>
-            <a href="/">Home</a>
+        <ul className="dropdown-content task_ul">
+          <li className="task_li">
+            <a href="" onClick={toggleDropdown}>Home</a>
           </li>
-          <li>
-            <a href="/about">About</a>
+          <li className="task_li">
+            <a href="#about" onClick={toggleDropdown}>About</a>
           </li>
-          <li>
-            <a href="/contact">Contact</a>
+          <li className="task_li">
+            <a href="/contact" onClick={toggleDropdown}>Contact</a>
           </li>
-          <li>
-            <a href="/blog">Blog</a>
+          <li className="task_li">
+            <a href="/blog" onClick={toggleDropdown}>Blog</a>
           </li>
-          <li>
-            <a href="/new-post">New Post</a>
+          <li className="task_li">
+            <a href="/new-post" onClick={toggleDropdown}>New Post</a>
           </li>
-          <li>
-            <a href="/login">Login</a>
+          <li className="task_li">
+            <a href="/login" onClick={toggleDropdown}>Login</a>
           </li>
         </ul>
       )}
@@ -91,10 +120,10 @@ class App extends Component {
   render() {
     return (
        <div><Dropdown/>
-      <ul>
+      <ul className="task_ul">
         {this.state.loaded ? (
           this.state.data.map(contact => (
-            <li key={contact.id}>
+            <li className="task_li" key={contact.id}>
               {contact.is_complete ? '✔️' : '❌' } | {contact.title} | {formatDate(contact.date_created)}
               | <UpdateTodoButton todoId={contact.id} />
             </li>
@@ -103,6 +132,7 @@ class App extends Component {
           <li>Loading tasks...</li>
         )}
       </ul>
+      <AboutBlock/>
       </div>
     );
   }
