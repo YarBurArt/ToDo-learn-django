@@ -34,8 +34,7 @@
 .dropdown-content a:hover {
   background-color: #f1f1f1; /* Серый фон при наведении */
 }
-
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content { /* TODO: */
   display: block; /* Отображает содержимое при наведении на кнопку */
 }
 /* Центрирование формы */

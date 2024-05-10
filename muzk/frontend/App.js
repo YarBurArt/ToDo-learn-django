@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
 function formatDate(dateString) {
@@ -20,13 +20,19 @@ const UpdateTodoButton = ({ todoId }) => { // TODO:
     </a>
   );
 };
-const Dropdown = ({}) => {
+const Dropdown = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className="dropdown">
-      <button className="dropdown-button">
+      <button className="dropdown-button" onClick={toggleDropdown}>
         Menu
       </button>
-      {(
+      {isOpen && (
         <ul className="dropdown-content">
           <li>
             <a href="/">Home</a>
