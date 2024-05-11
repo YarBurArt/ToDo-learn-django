@@ -1,3 +1,15 @@
+.theme-light {
+  --color-primary: #0060df;
+  --color-secondary: #fbfbfe;
+  --color-accent: #fd6f53;
+  --font-color: #000000;
+}
+.theme-dark {
+  --color-primary: #17ed90;
+  --color-secondary: #243133;
+  --color-accent: #12cdea;
+  --font-color: #ffffff;
+}
 /* Для экранов шириной менее 600px */
 @media (max-width: 600px) {
   .mrkdn {
@@ -108,7 +120,7 @@ body {
 #submit-button:hover {
   background-color: #3e8e41;
 }
-.update-todo-button {
+.update-todo-button, .delete-todo-button {
   background-color: #4CAF50; /* Зеленый цвет */
   color: #fff; /* Белый цвет */
   border: none;
@@ -121,7 +133,7 @@ body {
   font-family: 'Roboto', sans-serif; /* Шрифт Roboto */
   font-size: 14px; /* Размер шрифта 14px */
 }
-.update-todo-button:hover {
+.update-todo-button:hover, .delete-todo-button:hover {
   background-color: #3e8e41; /* Темно-зеленый цвет при наведении */
 }
 h2 {
@@ -198,4 +210,21 @@ html {
   color: #666;
   font-size: 1rem;
   margin-top: 0.5rem;
+}
+.container {
+  display: flex;
+  background: var(--color-secondary);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container h1 {
+  color: var(--font-color);
+}
+.container button {
+  color: var(--font-color);
+  background: var(--color-primary);
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 5px;
 }

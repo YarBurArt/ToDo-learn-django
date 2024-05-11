@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm";
 
 // all in one file because it's more interesting than react as a separate server
-// so you can make the combination of react and jinja2
+// so you can see the combination of react and jinja2
 // although it's still bad code, I'm just writing this for fun.
 
 function formatDate(dateString) {
@@ -25,6 +25,13 @@ const UpdateTodoButton = ({ todoId }) => { // TODO:
       <button className="update-todo-button">Update status</button>
     </a>
   );
+};
+const DeleteTodoButton = ({ todoId }) => { // TODO:
+  return (
+    <a href={`http://127.0.0.1:8000/delete_todo/${todoId}`}>
+      <button className="delete-todo-button">Delete</button>
+    </a>
+  )
 };
 const AboutBlock = () => {
   let content = `
@@ -150,9 +157,10 @@ class App extends Component {
             <li className="task_li" key={contact.id}>
               {contact.is_complete ? '✔️' : '❌' } | {contact.title} | {formatDate(contact.date_created)}
               | <UpdateTodoButton todoId={contact.id} />
+                <DeleteTodoButton todoId={contact.id} />
             </li>
           ))
-        ) : (
+        ) :(
           <li>Loading tasks...</li>
         )}
       </ul>

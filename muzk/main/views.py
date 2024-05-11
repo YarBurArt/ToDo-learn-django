@@ -68,8 +68,7 @@ def delete(request: HttpRequest = sample_request,
     """ del task by ID (ID from task list on index) """
     todo = ToDo.objects.get(id=todo_id)
     todo.delete()
-    return redirect('index')
-
+    return redirect('http://127.0.0.1:8000/frnt/')  # new index
 
 def about(request: HttpRequest = sample_request) -> HttpResponse:
     """ short text why this site exists  """
