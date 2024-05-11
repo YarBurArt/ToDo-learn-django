@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client';
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm";
 
+// all in one file because it's more interesting than react as a separate server
+// so you can make the combination of react and jinja2
+// although it's still bad code, I'm just writing this for fun.
 
 function formatDate(dateString) {
   // '2023-04-17T14:14:55.232984Z' -> '17.04.2023 14:14:55'
@@ -49,6 +52,27 @@ My passion for both programming and digital art has fueled a strong work ethic, 
     </div>
   )
 }
+const Contact = () => {
+  let contacts = [
+    {'url': 'https://github.com/yarburart',
+    'name': 'Email', 'add_i': 'send message if you have questions'},
+    {'url': 'https://github.com/yarburart',
+    'name': 'GitHub', 'add_i': 'some programming progects'},
+    {'url': 'https://www.artstation.com/yaburart',
+    'name': 'Artstation', 'add_i': 'digital programming'}]
+  return (
+    <div className="contact" id="contact">
+        {contacts.map((contact, index) => (
+        <div key={index}>
+          <a href={contact.url} target="_blank" rel="noopener noreferrer">
+            {contact.name}
+          </a>
+          <p>{contact.add_i}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -64,13 +88,13 @@ const Dropdown = () => {
       {isOpen && (
         <ul className="dropdown-content task_ul">
           <li className="task_li">
-            <a href="" onClick={toggleDropdown}>Home</a>
+            <a href="#top" onClick={toggleDropdown}>Home</a>
           </li>
           <li className="task_li">
             <a href="#about" onClick={toggleDropdown}>About</a>
           </li>
           <li className="task_li">
-            <a href="/contact" onClick={toggleDropdown}>Contact</a>
+            <a href="#contact" onClick={toggleDropdown}>Contact</a>
           </li>
           <li className="task_li">
             <a href="/blog" onClick={toggleDropdown}>Blog</a>
@@ -133,6 +157,7 @@ class App extends Component {
         )}
       </ul>
       <AboutBlock/>
+      <Contact/>
       </div>
     );
   }

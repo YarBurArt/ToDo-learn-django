@@ -19,9 +19,9 @@ and motivation to succeed. I am constantly pushing myself to learn more and beco
 I am excited to see how far I can take my programming and digital art skills.
 """
 
-contacts = [{'url': 'https://vk.com/yarburart',
-             'name': 'Вконтакте', 'add_i': 'связь со мной'},
+contacts = [{'url': 'email from github',
+             'name': 'Email', 'add_i': 'send message if you have questions'},
             {'url': 'https://github.com/yarburart',
-             'name': 'GitHub', 'add_i': 'проекты программирования'},
+             'name': 'GitHub', 'add_i': 'some programming progects'},
             {'url': 'https://instagram.com/yarburart',
-             'name': 'Instagram', 'add_i': 'проекты цифрового искусства'}]
+             'name': 'Instagram', 'add_i': 'digital programming'}]
