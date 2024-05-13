@@ -79,7 +79,7 @@ def add(request: HttpRequest = sample_request) -> HttpResponseRedirect:
     todo = ToDo(title=title,
                 date_created=timezone.now())
     todo.save()
-    return redirect('http://127.0.0.1:8000/frnt/')  # new index
+    return redirect('http://127.0.0.1:8000/frnt/')  # TODO: react rewrite
 
 
 def update(request: HttpRequest = sample_request,
