@@ -29,7 +29,7 @@ sample_request.META['HTTP_USER_AGENT'] = 'Mozilla/5.0'
 class ToDoListCreate(generics.ListCreateAPIView):
     """ view templ for DRF API """
     queryset: QuerySet = ToDo.objects.all()
-    serializer_class = ToDoSerializer
+    serializer_class = ToDoSerializer # pack by format 
 
 
 def index(request: HttpRequest = sample_request) -> HttpResponse:
