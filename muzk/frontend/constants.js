@@ -27,7 +27,7 @@ export const dropdown_uris = [
     {'name':'Home', 'uri':'#top'},
     {'name':'About', 'uri':'#about'},
     {'name':'Contact', 'uri':'#contact'},
-    {'name':'Blog', 'uri':'/blog'},
+    {'name':'Blog', 'uri':'#posts'},
     {'name':'New post', 'uri':'/new-post'},
     {'name':'Login', 'uri':'/login'},
   ];

@@ -8,13 +8,21 @@ from django.views.decorators.http import require_http_methods
 from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 
+from rest_framework import generics
+
 from .models import Post
+from .serializers import PostSerializer
 
 
 # data type for validating post display
 class PostView(TypedDict):
     post_list: QuerySet
     title: str
+
+
+class PostListCreateView(generics.ListCreateAPIView):
+    queryset: QuerySet = Post.objects.all()
+    serializer_class = PostSerializer
 
 
 # crutch for invalid requests and headers from user

@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm";
@@ -86,6 +87,51 @@ const Dropdown = () => {
     </div>
   );
 };
+const Blog = () => {
+  // generates an element with a list of blog entries dynamically by condition
+  const [data, setData] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [placeholder, setPlaceholder] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    // if URL contains hash fragment #posts
+    if (location.hash === '#posts') {
+      fetch(`${baseUrl}post/api/get_posts/`)
+        .then(response => {
+          if (response.status > 400) {
+            setPlaceholder('Something went wrong!');
+          } else {
+            return response.json();
+          }
+        })
+        .then(data => { // if response
+          setData(data);
+          setLoaded(true);
+        })
+        .catch(error => {
+          setPlaceholder('Something went wrong!');
+        });
+    }
+  }, [location.hash]); // check for useEffect
+  return (
+    <div id='posts'>
+      {location.hash === '#posts' && (
+        <div>
+          {loaded ? (
+            data.map(item => (
+              <div key={item.id}>
+                {item.title}
+              </div>
+            ))
+          ) : (
+            <div>{placeholder}</div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
 class App extends Component {
   // basic drawing of the application
   constructor(props) { // to process the request
@@ -114,6 +160,7 @@ class App extends Component {
         });
       });
   }
+
   // base list of tasks 
   render() {
     return (
