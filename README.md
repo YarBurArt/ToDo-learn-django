@@ -8,6 +8,7 @@ Todo ...
 
 Todo is a to-do list application that allows users to create a list of tasks that they need to complete. The project also includes several microservices, such as weather, check-in and blogging. A full CRUD is found in various forms. 
 
+There is also a frontend on react with dynamic loading from DRF, but it's done in an interesting way for the purpose of understanding react. 
 ## Install
 
 To work with the project, you will need to:
