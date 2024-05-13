@@ -5,8 +5,12 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.utils import timezone
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from rest_framework import generics
+from django.http import (
+    HttpRequest, HttpResponse, HttpResponseRedirect, Http404)
+
+from rest_framework import (mixins, status, generics)
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from .models import ToDo
 from .strings import about_me_str, contacts
@@ -27,9 +31,35 @@ sample_request.META['HTTP_USER_AGENT'] = 'Mozilla/5.0'
 
 
 class ToDoListCreate(generics.ListCreateAPIView):
-    """ view templ for DRF API """
+    """ view todolist templ for DRF API """
     queryset: QuerySet = ToDo.objects.all()
     serializer_class = ToDoSerializer # pack by format 
+
+
+class ToDoUpdateView(generics.UpdateAPIView):
+    """ view todo templ for DRF API """
+    queryset = ToDo.objects.all()
+    serializer_class = ToDoSerializer
+    lookup_field = 'id'
+
+    def update(self, request: HttpRequest, *args, **kwargs):
+        """ Changes the completion of a task. """
+        instance = self.get_object()
+        instance.is_complete = not instance.is_complete
+        instance.save()
+        return Response(status=status.HTTP_302_FOUND)
+    
+
+class ToDoDeleteView(generics.DestroyAPIView):
+    queryset = ToDo.objects.all()
+    serializer_class = ToDoSerializer
+    lookup_field = 'id'
+
+    def destroy(self, request: HttpRequest, *args, **kwargs):
+        """ Deletes a task by ID. """
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_302_FOUND)
 
 
 def index(request: HttpRequest = sample_request) -> HttpResponse:
@@ -56,9 +86,7 @@ def update(request: HttpRequest = sample_request,
            todo_id: int = 1) -> HttpResponseRedirect:
     """ changes the completion of a task """
     todo = ToDo.objects.get(id=todo_id)
-    tmp_i = todo.is_complete
-    # one-liner inverts value (True => False, False => True)
-    todo.is_complete = not tmp_i if tmp_i else True
+    todo.is_complete = not todo.is_complete
     todo.save()
     return redirect('http://127.0.0.1:8000/frnt/')  # new index
 

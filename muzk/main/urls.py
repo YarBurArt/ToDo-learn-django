@@ -6,6 +6,8 @@ from . import views
 urlpatterns = [
     path('', views.index),
     path('api/todo/', views.ToDoListCreate.as_view()),
+    path('api/todo/update/<int:id>', views.ToDoUpdateView.as_view()),
+    path('api/todo/delete/<int:id>', views.ToDoDeleteView.as_view()),
 ]
 # url sample frontend 
 urlpatterns += [
