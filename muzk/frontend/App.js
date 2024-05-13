@@ -12,6 +12,7 @@ import {content_about, contacts,
 
 function formatDate(dateString) {
   // '2023-04-17T14:14:55.232984Z' -> '17.04.2023 14:14:55'
+  // piece by piece, separate the date and put it all back together again
   const date = new Date(dateString);
   const day = date.getDate();
   const month = date.getMonth() + 1;
@@ -23,6 +24,7 @@ function formatDate(dateString) {
   return formattedDate;
 }
 const UpdateTodoButton = ({ todoId }) => { // TODO:
+  // draws button to change the status of task completion
   return (
     <a href={`${baseUrl}update_todo/${todoId}`}>
       <button className="update-todo-button">Update status</button>
@@ -30,6 +32,7 @@ const UpdateTodoButton = ({ todoId }) => { // TODO:
   );
 };
 const DeleteTodoButton = ({ todoId }) => { // TODO:
+  // draws a button to delete a task from the database 
   return (
     <a href={`${baseUrl}delete_todo/${todoId}`}>
       <button className="delete-todo-button">Delete</button>
@@ -37,6 +40,7 @@ const DeleteTodoButton = ({ todoId }) => { // TODO:
   )
 };
 const AboutBlock = () => {
+  // plain text with markdown formatting
   return (
     <div className="mrkdn" id="about">
     <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -46,6 +50,7 @@ const AboutBlock = () => {
   )
 }
 const Contact = () => {
+  // generates a list of contact records
   return (
     <div className="contact" id="contact">
         {contacts.map((contact, index) => (
@@ -61,11 +66,11 @@ const Contact = () => {
 }
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  // for smooth menu opening/closing effect
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  
+  // list of places to go from frnt, TODO: remove redirect
   return (
     <div className="dropdown">
       <button className="dropdown-button" onClick={toggleDropdown}>Menu</button>
@@ -82,7 +87,8 @@ const Dropdown = () => {
   );
 };
 class App extends Component {
-  constructor(props) {
+  // basic drawing of the application
+  constructor(props) { // to process the request
     super(props);
     this.state = {
       data: [],
@@ -90,7 +96,7 @@ class App extends Component {
       placeholder: "Loading"
     };
   }
-  // get tasks 
+  // get tasks execute immediately after loading 
   componentDidMount() {
     fetch(`${baseUrl}api/todo`) // TODO: clean front
       .then(response => {
@@ -103,7 +109,7 @@ class App extends Component {
       }).then(
         data => {
         this.setState(() => {
-          console.log(data);
+          // console.log(data); // to check the accuracy of the data by eye  
           return { data, loaded: true };
         });
       });
@@ -113,8 +119,8 @@ class App extends Component {
     return (
        <div><Dropdown/>
       <ul className="task_ul">
-        {this.state.loaded ? (
-          this.state.data.map(contact => (
+        {this.state.loaded ? ( // if the data is loaded from backend
+          this.state.data.map(contact => ( // then go through the data list 
             <li className="task_li" key={contact.id}>
               {contact.is_complete ? '✔️' : '❌' } | {contact.title} | {formatDate(contact.date_created)}
               | <UpdateTodoButton todoId={contact.id} />
@@ -122,7 +128,7 @@ class App extends Component {
             </li>
           ))
         ) :(
-          <li>Loading tasks...</li>
+          <li>Loading tasks...</li> // if the data is not loaded
         )}
       </ul>
       <AboutBlock/>
