@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm";
+import axios from 'axios';
 
 import {content_about, contacts, 
         dropdown_uris, baseUrl} from "./constants";
@@ -24,19 +25,39 @@ function formatDate(dateString) {
   const formattedDate = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
   return formattedDate;
 }
-const UpdateTodoButton = ({ todoId }) => { // TODO:
+const UpdateTodoButton = ({ todoId }) => {
   // draws button to change the status of task completion
-  return (
-    <a href={`${baseUrl}update_todo/${todoId}`}>
-      <button className="update-todo-button">Update status</button>
+  const handleUpdateTodo = async () => {
+    try {
+      const response = await axios.patch(`${baseUrl}api/todo/update/${todoId}`,{});
+      console.log(response.data); // DEBUG
+    } catch (error) {
+      // console.error(error); // DEBUG
+      alert("Error updating, please reload page");
+    }
+  }; // TODO: fix reload 
+  return ( 
+    <a href=""> 
+      <button className="update-todo-button" onClick={handleUpdateTodo}>
+        Update status</button>
     </a>
   );
 };
-const DeleteTodoButton = ({ todoId }) => { // TODO:
+const DeleteTodoButton = ({ todoId }) => { 
   // draws a button to delete a task from the database 
+  const handleDeleteTodo = async () => {
+    try { // TODO: create security check before del from DB
+      await axios.delete(`${baseUrl}api/todo/delete/${todoId}`);
+      onDelete(todoId); // from axios to parent element
+    } catch (error) {
+      // console.error(error); DEBUG
+      alert("Error updating, please reload page");
+    }
+  }; // TODO: fix reload 
   return (
-    <a href={`${baseUrl}delete_todo/${todoId}`}>
-      <button className="delete-todo-button">Delete</button>
+    <a href="">
+      <button className="delete-todo-button"  onClick={handleDeleteTodo}>
+        Delete</button>
     </a>
   )
 };
@@ -120,18 +141,11 @@ const Blog = () => {
         <div>
           {loaded ? (
             data.map(item => (
-              <div key={item.id}>
-                {item.title}
-              </div>
-            ))
-          ) : (
-            <div>{placeholder}</div>
-          )}
-        </div>
-      )}
+              <div key={item.id}> {item.title}</div>
+            ))) : (<div>{placeholder}</div>)}
+        </div>)}
     </div>
-  );
-};
+);};
 class App extends Component {
   // basic drawing of the application
   constructor(props) { // to process the request

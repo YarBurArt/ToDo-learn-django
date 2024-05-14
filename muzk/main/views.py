@@ -30,14 +30,14 @@ sample_request.path = "/index/"
 sample_request.META['HTTP_USER_AGENT'] = 'Mozilla/5.0'
 
 
-class ToDoListCreate(generics.ListCreateAPIView):
+class ToDoListCreate(generics.ListCreateAPIView): # return list
     """ view todolist templ for DRF API """
     queryset: QuerySet = ToDo.objects.all()
     serializer_class = ToDoSerializer # pack by format 
 
 
 class ToDoUpdateView(generics.UpdateAPIView):
-    """ view todo templ for DRF API """
+    """ view update status todo templ for DRF API """
     queryset = ToDo.objects.all()
     serializer_class = ToDoSerializer
     lookup_field = 'id'
@@ -51,6 +51,7 @@ class ToDoUpdateView(generics.UpdateAPIView):
     
 
 class ToDoDeleteView(generics.DestroyAPIView):
+    """ view delete status todo templ for DRF API """
     queryset = ToDo.objects.all()
     serializer_class = ToDoSerializer
     lookup_field = 'id'
@@ -88,7 +89,7 @@ def update(request: HttpRequest = sample_request,
     todo = ToDo.objects.get(id=todo_id)
     todo.is_complete = not todo.is_complete
     todo.save()
-    return redirect('http://127.0.0.1:8000/frnt/')  # new index
+    return redirect('index')  
 
 
 def delete(request: HttpRequest = sample_request,
@@ -96,7 +97,7 @@ def delete(request: HttpRequest = sample_request,
     """ del task by ID (ID from task list on index) """
     todo = ToDo.objects.get(id=todo_id)
     todo.delete()
-    return redirect('http://127.0.0.1:8000/frnt/')  # new index
+    return redirect('index')  
 
 def about(request: HttpRequest = sample_request) -> HttpResponse:
     """ short text why this site exists  """
