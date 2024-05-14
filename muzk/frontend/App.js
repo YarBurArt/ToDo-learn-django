@@ -112,7 +112,7 @@ const Blog = () => {
   const [data, setData] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [placeholder, setPlaceholder] = useState('');
-  console.log("================================");
+  // console.log("================================"); // DEBUG render
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -126,7 +126,7 @@ const Blog = () => {
     fetchPosts();
   }, []);
   return (
-    <div id="posts"> {loaded ? (
+    <div id="posts" className='mrkdn'> {loaded ? (
         <ul>
           {data.map((post) => (
             <li key={post.id}>{post.title}</li>
