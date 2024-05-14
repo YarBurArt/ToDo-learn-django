@@ -1,5 +1,4 @@
-import React, { Component, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { Component, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm";
@@ -113,37 +112,29 @@ const Blog = () => {
   const [data, setData] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [placeholder, setPlaceholder] = useState('');
-  const location = useLocation();
-
+  console.log("================================");
   useEffect(() => {
-    // if URL contains hash fragment #posts
-    if (location.hash === '#posts') {
-      fetch(`${baseUrl}post/api/get_posts/`)
-        .then(response => {
-          if (response.status > 400) {
-            setPlaceholder('Something went wrong!');
-          } else {
-            return response.json();
-          }
-        })
-        .then(data => { // if response
-          setData(data);
-          setLoaded(true);
-        })
-        .catch(error => {
-          setPlaceholder('Something went wrong!');
-        });
-    }
-  }, [location.hash]); // check for useEffect
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}post/api/get_posts/`);
+        setData(response.data);
+        setLoaded(true);
+      } catch (error) {
+        setPlaceholder('Something went wrong!');
+      };
+    };
+    fetchPosts();
+  }, []);
   return (
-    <div id='posts'>
-      {location.hash === '#posts' && (
-        <div>
-          {loaded ? (
-            data.map(item => (
-              <div key={item.id}> {item.title}</div>
-            ))) : (<div>{placeholder}</div>)}
-        </div>)}
+    <div id="posts"> {loaded ? (
+        <ul>
+          {data.map((post) => (
+            <li key={post.id}>{post.title}</li>
+          ))}
+        </ul>
+      ) :(
+        <p>{placeholder}</p>
+      )}
     </div>
 );};
 class App extends Component {
@@ -192,6 +183,7 @@ class App extends Component {
           <li>Loading tasks...</li> // if the data is not loaded
         )}
       </ul>
+      {window.location.hash === '#posts' && <Blog/> }
       <AboutBlock/>
       <Contact/>
       </div>
