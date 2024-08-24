@@ -15,19 +15,14 @@ from rest_framework.response import Response
 from .models import ToDo
 from .strings import about_me_str, contacts
 from .serializers import ToDoSerializer
+from .repositories import ToDoRepository
 
+# TODO: data validation 
 
 # data type for validating task display
 class TodoView(TypedDict):
     todo_list: QuerySet
     title: str
-
-
-# crutch for invalid requests and headers from user
-sample_request = HttpRequest()
-sample_request.method = "GET"
-sample_request.path = "/index/"
-sample_request.META['HTTP_USER_AGENT'] = 'Mozilla/5.0'
 
 
 class ToDoListCreate(generics.ListCreateAPIView): # return list
@@ -63,47 +58,40 @@ class ToDoDeleteView(generics.DestroyAPIView):
         return Response(status=status.HTTP_302_FOUND)
 
 
-def index(request: HttpRequest = sample_request) -> HttpResponse:
+def index(request: HttpRequest) -> HttpResponse:
     """ get all the tasks from DB and passes them to main/index.html """
-    todos: QuerySet = ToDo.objects.all()
-    context: TodoView = {'todo_list': todos,
-                         'title': 'Главная страница'}
-    return render(request, 'main/index.html',
-                  context=context)
+    todos = ToDoRepository.get_all()
+    context: TodoView = {'todo_list': todos, 'title': 'Главная страница'}
+    return render(request, 'main/index.html', context=context)
 
 
 @require_http_methods(['POST'])
 @csrf_exempt
-def add(request: HttpRequest = sample_request) -> HttpResponseRedirect:
+def add(request: HttpRequest) -> HttpResponseRedirect:
     """ save task/date to list, title - like task name """
     title: str = request.POST['title']
-    todo = ToDo(title=title,
-                date_created=timezone.now())
-    todo.save()
-    return redirect('http://127.0.0.1:8000/frnt/')  # TODO: react rewrite
+    todo = ToDoRepository.create(title)
+    return redirect('index')
 
 
-def update(request: HttpRequest = sample_request,
-           todo_id: int = 1) -> HttpResponseRedirect:
+def update(request: HttpRequest, todo_id: int = 1) -> HttpResponseRedirect:
     """ changes the completion of a task """
-    todo = ToDo.objects.get(id=todo_id)
-    todo.is_complete = not todo.is_complete
-    todo.save()
-    return redirect('index')  
+    todo = ToDoRepository.get_by_id(todo_id)
+    ToDoRepository.update(todo)
+    return redirect('index')
 
 
-def delete(request: HttpRequest = sample_request,
-           todo_id: int = 1) -> HttpResponseRedirect:
+def delete(request: HttpRequest, todo_id: int = 1) -> HttpResponseRedirect:
     """ del task by ID (ID from task list on index) """
-    todo = ToDo.objects.get(id=todo_id)
-    todo.delete()
+    todo = ToDoRepository.get_by_id(todo_id)
+    ToDoRepository.delete(todo)
     return redirect('index')  
 
-def about(request: HttpRequest = sample_request) -> HttpResponse:
+def about(request: HttpRequest) -> HttpResponse:
     """ short text why this site exists  """
     return render(request, "main/about.html", context={'text': about_me_str})
 
 
-def contact(request: HttpRequest = sample_request) -> HttpResponse:
+def contact(request: HttpRequest) -> HttpResponse:
     """ my contacts, out of date """
     return render(request, "main/cont.html", context={'contacts': contacts})
