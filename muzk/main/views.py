@@ -4,7 +4,6 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from django.utils import timezone
 from django.http import (
     HttpRequest, HttpResponse, HttpResponseRedirect, Http404)
 
@@ -18,6 +17,7 @@ from .serializers import ToDoSerializer
 from .repositories import ToDoRepository
 
 # TODO: data validation 
+
 
 # data type for validating task display
 class TodoView(TypedDict):
@@ -60,7 +60,7 @@ class ToDoDeleteView(generics.DestroyAPIView):
 
 def index(request: HttpRequest) -> HttpResponse:
     """ get all the tasks from DB and passes them to main/index.html """
-    todos = ToDoRepository.get_all()
+    todos = ToDoRepository().get_all()
     context: TodoView = {'todo_list': todos, 'title': 'Главная страница'}
     return render(request, 'main/index.html', context=context)
 
@@ -70,22 +70,23 @@ def index(request: HttpRequest) -> HttpResponse:
 def add(request: HttpRequest) -> HttpResponseRedirect:
     """ save task/date to list, title - like task name """
     title: str = request.POST['title']
-    todo = ToDoRepository.create(title)
+    todo = ToDoRepository().create(title)
     return redirect('index')
 
 
 def update(request: HttpRequest, todo_id: int = 1) -> HttpResponseRedirect:
     """ changes the completion of a task """
     todo = ToDoRepository.get_by_id(todo_id)
-    ToDoRepository.update(todo)
+    ToDoRepository().update(todo)
     return redirect('index')
 
 
 def delete(request: HttpRequest, todo_id: int = 1) -> HttpResponseRedirect:
     """ del task by ID (ID from task list on index) """
     todo = ToDoRepository.get_by_id(todo_id)
-    ToDoRepository.delete(todo)
+    ToDoRepository().delete(todo)
     return redirect('index')  
+
 
 def about(request: HttpRequest) -> HttpResponse:
     """ short text why this site exists  """

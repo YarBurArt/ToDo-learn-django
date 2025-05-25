@@ -1,8 +1,8 @@
-export const baseUrl = "http://127.0.0.1:8000/";
+export const baseUrl = "http://127.0.0.1:8000/"; // CHANGE ME
 export const content_about = `
 ## About Me
 
-I'm a passionate learner with a love for programming!  I recently began diving into the worlds of Python and C#, eager to expand my knowledge in these languages. As a beginner, I'm focusing on building a strong foundation by mastering the fundamentals of programming concepts. I'm also exploring the vast landscape of libraries, frameworks, and tools available for both languages.
+I'm a ********** learner with a **** for programming!  I recently began diving into the ****** of Python and C#, eager to expand my knowledge in these languages. As a beginner, I'm focusing on building a strong foundation by mastering the fundamentals of programming concepts. I'm also exploring the vast landscape of libraries, frameworks, and tools available for both languages.
 
 - Self-Driven Learner
 

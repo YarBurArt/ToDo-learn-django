@@ -40,9 +40,13 @@ _OR SSH_
 
 To start the server, execute
 
+`cd muzk`
+
 `python manage.py runserver`
 
 Open your browser and go to the address http://127.0.0.1:8000/
+
+If you chose a different port outside of debug, change the backend baseUrl in frontend/constants.js
 
 ## TODO
 - normal design
